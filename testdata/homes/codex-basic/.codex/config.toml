@@ -1,0 +1,11 @@
+version = "0.150.0"
+
+[plugins."review-kit@acme-market"]
+enabled = true
+
+[mcp_servers.docs]
+command = "npx"
+args = ["example-mcp@1.2.3"]
+
+[mcp_servers.docs.env]
+DOCS_TOKEN = "secret-value"

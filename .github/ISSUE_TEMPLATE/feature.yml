@@ -1,0 +1,23 @@
+name: Feature
+description: A change to checks, agents, or report formats
+title: "[feature] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Default scan stays offline and read-only. Do not propose exploit
+        reproduction. Unverified paths need a public source before a reader
+        is added. See CONTRIBUTING.md and docs/agents.md.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+    validations:
+      required: true

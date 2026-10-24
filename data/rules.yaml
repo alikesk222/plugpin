@@ -1,0 +1,80 @@
+# Source of truth for plugpin rule ids. Prefix PP replaces the retired prefix.
+rules:
+  - id: PP001
+    severity: critical
+    name: HeadNotPinned
+    title: Resolved HEAD does not match the pinned SHA
+    summary: The commit checked out on disk is not the pinned commit.
+    remediation: >
+      Disable the plugin, turn off auto-update, confirm the agent is on a
+      fixed build, and reinstall so HEAD is detached at the pinned commit.
+  - id: PP002
+    severity: critical
+    name: HeadAttachedToShaNamedBranch
+    title: HEAD is attached to a branch whose name is a 40-hex SHA
+    summary: A branch named like a commit SHA is the thing HEAD is on, which is the Plugin4Shell checkout bypass.
+    remediation: >
+      Disable the plugin and reinstall from a verified commit. Do not check
+      out a branch whose name is a 40-hex SHA.
+  - id: PP003
+    severity: critical
+    name: FetchHeadBranch
+    title: Repository contains a branch named FETCH_HEAD
+    summary: A branch named FETCH_HEAD can be selected as the default checkout. The normal FETCH_HEAD file is not this finding.
+    remediation: >
+      Treat the repository as untrusted, disable the plugin, and reinstall
+      from a verified remote.
+  - id: PP004
+    severity: high
+    name: AgentBelowFloor
+    title: Agent version is below the Plugin4Shell fix floor
+    summary: The installed agent is older than the fixed build recorded in floors.yaml.
+    remediation: >
+      Update the agent to at least the floor in floors.yaml before installing
+      or updating plugins.
+  - id: PP005
+    severity: info
+    name: StaleInstallRecord
+    title: Install record SHA does not match the git state on disk
+    summary: The recorded SHA can lag behind updates. This is informational, not proof of a bypass.
+    remediation: >
+      Compare the marketplace pin and the on-disk HEAD. A stale record alone
+      is not a critical finding.
+  - id: PP010
+    severity: medium
+    name: NewHook
+    title: Hook is not in the approved baseline
+    summary: A hook command was not present when the baseline was approved.
+    remediation: >
+      Review the command. Approve a new baseline only if you trust it.
+      plugpin does not run the command.
+  - id: PP011
+    severity: medium
+    name: ChangedHook
+    title: Approved hook command changed
+    summary: The hash of a hook command no longer matches the baseline.
+    remediation: >
+      Review the new command before approving a new baseline.
+      plugpin does not run the command.
+  - id: PP020
+    severity: medium
+    name: NewMCPServer
+    title: MCP server is not in the approved baseline
+    summary: An MCP server definition was not present when the baseline was approved.
+    remediation: >
+      Review the command or URL. Approve a new baseline only if you trust it.
+  - id: PP021
+    severity: medium
+    name: ChangedMCPServer
+    title: Approved MCP server command or URL changed
+    summary: The command, arguments, transport, or URL of an MCP server no longer matches the baseline.
+    remediation: >
+      Review the new definition before approving a new baseline.
+      Environment values are not stored.
+  - id: PP040
+    severity: high
+    name: AutoUpdateWithoutFix
+    title: Plugin auto-update is enabled on an agent with no client fix
+    summary: Auto-update can pull a new checkout with no click on an agent that is still exposed.
+    remediation: >
+      Turn off plugin auto-update and install plugins from a commit you have reviewed.

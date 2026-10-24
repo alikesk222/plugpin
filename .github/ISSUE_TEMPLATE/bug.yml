@@ -1,0 +1,37 @@
+name: Bug
+description: A defect in plugpin's read-only scan, report, or baseline
+title: "[bug] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include secrets, home-directory dumps, or exploit details.
+        Vulnerabilities in plugpin belong in a private security advisory.
+        See SECURITY.md.
+  - type: textarea
+    id: version
+    attributes:
+      label: Version
+      description: Output of `plugpin version`, plus OS and architecture.
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command
+      description: The plugpin command you ran, with paths redacted.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+    validations:
+      required: true

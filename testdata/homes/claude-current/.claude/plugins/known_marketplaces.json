@@ -1,0 +1,7 @@
+{
+  "acme-market": {
+    "source": {"source": "github", "repo": "example/market"},
+    "installLocation": "/nonexistent/plugpin-fixture/marketplaces/acme-market",
+    "autoUpdate": false
+  }
+}

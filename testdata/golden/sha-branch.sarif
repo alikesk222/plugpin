@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "PP001",
+          "level": "error",
+          "message": {
+            "text": "review-kit@acme-market: Resolved HEAD does not match the pinned SHA"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "~/.claude/plugins/marketplaces/acme-market/.git/HEAD"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PP002",
+          "level": "error",
+          "message": {
+            "text": "review-kit@acme-market: HEAD is attached to a branch whose name is a 40-hex SHA"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "~/.claude/plugins/marketplaces/acme-market/.git/HEAD"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "PP005",
+          "level": "note",
+          "message": {
+            "text": "review-kit@acme-market: Install record SHA does not match the git state on disk"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "~/.claude/plugins/marketplaces/acme-market/.git/HEAD"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "informationUri": "https://github.com/alikesk222/plugpin",
+          "name": "plugpin",
+          "rules": [
+            {
+              "id": "PP001",
+              "name": "HeadNotPinned",
+              "shortDescription": {
+                "text": "Resolved HEAD does not match the pinned SHA"
+              },
+              "fullDescription": {
+                "text": "The commit checked out on disk is not the pinned commit."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Disable the plugin, turn off auto-update, confirm the agent is on a fixed build, and reinstall so HEAD is detached at the pinned commit."
+              }
+            },
+            {
+              "id": "PP002",
+              "name": "HeadAttachedToShaNamedBranch",
+              "shortDescription": {
+                "text": "HEAD is attached to a branch whose name is a 40-hex SHA"
+              },
+              "fullDescription": {
+                "text": "A branch named like a commit SHA is the thing HEAD is on, which is the Plugin4Shell checkout bypass."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Disable the plugin and reinstall from a verified commit. Do not check out a branch whose name is a 40-hex SHA."
+              }
+            },
+            {
+              "id": "PP003",
+              "name": "FetchHeadBranch",
+              "shortDescription": {
+                "text": "Repository contains a branch named FETCH_HEAD"
+              },
+              "fullDescription": {
+                "text": "A branch named FETCH_HEAD can be selected as the default checkout. The normal FETCH_HEAD file is not this finding."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Treat the repository as untrusted, disable the plugin, and reinstall from a verified remote."
+              }
+            },
+            {
+              "id": "PP004",
+              "name": "AgentBelowFloor",
+              "shortDescription": {
+                "text": "Agent version is below the Plugin4Shell fix floor"
+              },
+              "fullDescription": {
+                "text": "The installed agent is older than the fixed build recorded in floors.yaml."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Update the agent to at least the floor in floors.yaml before installing or updating plugins."
+              }
+            },
+            {
+              "id": "PP005",
+              "name": "StaleInstallRecord",
+              "shortDescription": {
+                "text": "Install record SHA does not match the git state on disk"
+              },
+              "fullDescription": {
+                "text": "The recorded SHA can lag behind updates. This is informational, not proof of a bypass."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "help": {
+                "text": "Compare the marketplace pin and the on-disk HEAD. A stale record alone is not a critical finding."
+              }
+            },
+            {
+              "id": "PP010",
+              "name": "NewHook",
+              "shortDescription": {
+                "text": "Hook is not in the approved baseline"
+              },
+              "fullDescription": {
+                "text": "A hook command was not present when the baseline was approved."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Review the command. Approve a new baseline only if you trust it. plugpin does not run the command."
+              }
+            },
+            {
+              "id": "PP011",
+              "name": "ChangedHook",
+              "shortDescription": {
+                "text": "Approved hook command changed"
+              },
+              "fullDescription": {
+                "text": "The hash of a hook command no longer matches the baseline."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Review the new command before approving a new baseline. plugpin does not run the command."
+              }
+            },
+            {
+              "id": "PP020",
+              "name": "NewMCPServer",
+              "shortDescription": {
+                "text": "MCP server is not in the approved baseline"
+              },
+              "fullDescription": {
+                "text": "An MCP server definition was not present when the baseline was approved."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Review the command or URL. Approve a new baseline only if you trust it."
+              }
+            },
+            {
+              "id": "PP021",
+              "name": "ChangedMCPServer",
+              "shortDescription": {
+                "text": "Approved MCP server command or URL changed"
+              },
+              "fullDescription": {
+                "text": "The command, arguments, transport, or URL of an MCP server no longer matches the baseline."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Review the new definition before approving a new baseline. Environment values are not stored."
+              }
+            },
+            {
+              "id": "PP040",
+              "name": "AutoUpdateWithoutFix",
+              "shortDescription": {
+                "text": "Plugin auto-update is enabled on an agent with no client fix"
+              },
+              "fullDescription": {
+                "text": "Auto-update can pull a new checkout with no click on an agent that is still exposed."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Turn off plugin auto-update and install plugins from a commit you have reviewed."
+              }
+            }
+          ],
+          "version": "0.1.0"
+        }
+      }
+    }
+  ],
+  "version": "2.1.0"
+}

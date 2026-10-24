@@ -1,0 +1,3 @@
+# SHA-256 (hex, lowercase) of the banned substring.
+# The substring is not stored in this repository. A local pre-push hook compares it.
+46a4eebd20d881ecfc0ecb54f6d8346524fadb143726d256b1a045303fc67717
