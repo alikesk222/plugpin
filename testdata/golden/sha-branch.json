@@ -1,0 +1,114 @@
+{
+  "schema": "plugpin.report/v1",
+  "tool": {
+    "name": "plugpin",
+    "version": "0.1.0"
+  },
+  "host": {
+    "os": "linux",
+    "arch": "amd64"
+  },
+  "scanned_at": "2026-10-24T16:00:00Z",
+  "agents": [
+    {
+      "id": "claude-code",
+      "version": "2.1.281",
+      "version_source": "metadata-file",
+      "plugin4shell_floor": "2.1.179",
+      "status": "ok"
+    },
+    {
+      "id": "codex",
+      "version": "",
+      "version_source": "unknown",
+      "plugin4shell_floor": "0.146.0",
+      "status": "not-installed"
+    },
+    {
+      "id": "copilot-cli",
+      "version": "",
+      "version_source": "unknown",
+      "plugin4shell_floor": null,
+      "status": "not-installed"
+    },
+    {
+      "id": "gemini-cli",
+      "version": "",
+      "version_source": "unknown",
+      "plugin4shell_floor": null,
+      "status": "not-installed"
+    }
+  ],
+  "plugins": [
+    {
+      "agent": "claude-code",
+      "id": "review-kit@acme-market",
+      "git_dir": "~/.claude/plugins/marketplaces/acme-market",
+      "install_path": "~/.claude/plugins/marketplaces/acme-market",
+      "pinned_sha": "1d0697f6f1ca622527e0cd464df0e418052a4b77",
+      "pin_source": "manifest",
+      "resolved_head": "90d2c48fb1bd829a184a8880af08f5ca57f63b20",
+      "head_state": "attached:refs/heads/1d0697f6f1ca622527e0cd464df0e418052a4b77",
+      "auto_update": true,
+      "record_sha": "1d0697f6f1ca622527e0cd464df0e418052a4b77",
+      "scope": "user"
+    }
+  ],
+  "hooks": [
+    {
+      "agent": "claude-code",
+      "scope": "user",
+      "file": "~/.claude/settings.json",
+      "event": "SessionStart",
+      "command": "echo ok",
+      "command_sha256": "7d10fced96b38c84f90db07708f266e83da48ca763189eaed7fe1a00348385eb"
+    }
+  ],
+  "mcp_servers": [],
+  "findings": [
+    {
+      "rule": "PP001",
+      "severity": "critical",
+      "title": "Resolved HEAD does not match the pinned SHA",
+      "agent": "claude-code",
+      "subject": "review-kit@acme-market",
+      "evidence": {
+        "head_state": "attached:refs/heads/1d0697f6f1ca622527e0cd464df0e418052a4b77",
+        "pinned_sha": "1d0697f6f1ca622527e0cd464df0e418052a4b77",
+        "resolved_head": "90d2c48fb1bd829a184a8880af08f5ca57f63b20"
+      },
+      "remediation": "Disable the plugin, turn off auto-update, confirm the agent is on a fixed build, and reinstall so HEAD is detached at the pinned commit."
+    },
+    {
+      "rule": "PP002",
+      "severity": "critical",
+      "title": "HEAD is attached to a branch whose name is a 40-hex SHA",
+      "agent": "claude-code",
+      "subject": "review-kit@acme-market",
+      "evidence": {
+        "head_ref": "refs/heads/1d0697f6f1ca622527e0cd464df0e418052a4b77",
+        "pinned_sha": "1d0697f6f1ca622527e0cd464df0e418052a4b77",
+        "resolved_head": "90d2c48fb1bd829a184a8880af08f5ca57f63b20"
+      },
+      "remediation": "Disable the plugin and reinstall from a verified commit. Do not check out a branch whose name is a 40-hex SHA."
+    },
+    {
+      "rule": "PP005",
+      "severity": "info",
+      "title": "Install record SHA does not match the git state on disk",
+      "agent": "claude-code",
+      "subject": "review-kit@acme-market",
+      "evidence": {
+        "record_sha": "1d0697f6f1ca622527e0cd464df0e418052a4b77",
+        "resolved_head": "90d2c48fb1bd829a184a8880af08f5ca57f63b20"
+      },
+      "remediation": "Compare the marketplace pin and the on-disk HEAD. A stale record alone is not a critical finding."
+    }
+  ],
+  "summary": {
+    "critical": 2,
+    "high": 0,
+    "medium": 0,
+    "info": 1
+  }
+}

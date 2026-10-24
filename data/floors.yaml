@@ -1,0 +1,35 @@
+# Plugin4Shell fix floors. Sources consulted for the v0.1 snapshot dated 2026-10-24.
+# Null floor means there is no client fix to compare against.
+agents:
+  claude-code:
+    floor: "2.1.179"
+    fix_status: fixed
+    advisory: GHSA-pq7j-f95f-qfcv
+    source: https://github.com/anthropics/claude-code/security/advisories/GHSA-pq7j-f95f-qfcv
+    note: >
+      Fixed in 2.1.179. The advisory was published on 9 October 2026
+      (CVSS 4.0 score 7.7). Anomity reports CVE-2026-86063; the CVE field
+      on the GHSA page was not independently verified.
+  codex:
+    floor: "0.146.0"
+    fix_status: fixed
+    source: https://www.air.security/blog-posts/plugin4shell
+    note: >
+      Release note: Verify Git plugin SHA checkouts (#34644).
+      Air confirmed the fix on 12 August 2026.
+  copilot-cli:
+    floor: null
+    fix_status: no-client-fix
+    source: https://www.air.security/blog-posts/plugin4shell
+    note: >
+      No client-side fix. GitHub rejects SHA-like branch names on
+      GitHub-hosted repositories, so those repositories are not exploitable
+      there. Bitbucket and self-hosted sources remain exposed.
+  gemini-cli:
+    floor: null
+    fix_status: no-fix
+    source: https://www.air.security/blog-posts/plugin4shell
+    note: >
+      No fix is planned. The consumer CLI is deprecated in favor of
+      Antigravity CLI. The known variant uses a branch named FETCH_HEAD.
+      v0.1 only detects the install and raises this advisory.

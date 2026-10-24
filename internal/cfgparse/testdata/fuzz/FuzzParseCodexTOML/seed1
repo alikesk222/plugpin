@@ -1,0 +1,2 @@
+go test fuzz v1
+[]byte("version = \"0.1.0\"\n[mcp_servers.docs]\ncommand = \"npx\"\n")

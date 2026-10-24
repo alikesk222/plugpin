@@ -1,0 +1,6 @@
+{
+  "source": "git",
+  "type": "git",
+  "ref": "main",
+  "autoUpdate": true
+}

@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {"type": "command", "command": "echo ok"}
+    ]
+  }
+}
